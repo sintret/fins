@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home" android:icon="@drawable/home"
+            android:title="Home" />
+        <item android:id="@+id/nav_task" android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Task" />
+        <item android:id="@+id/nav_history" android:icon="@android:drawable/ic_menu_recent_history"
+            android:title="History" />
+        <item android:id="@+id/nav_scanner" android:icon="@android:drawable/ic_menu_camera"
+            android:title="Scanner" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item android:id="@+id/nav_map" android:icon="@android:drawable/ic_menu_myplaces"
+                android:title="Map" />
+
+        </menu>
+    </item>
+
+</menu>
