@@ -5,21 +5,18 @@ import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import eizougraphic.sintret.finsrecipe.ItemActivity;
 import eizougraphic.sintret.finsrecipe.R;
 import eizougraphic.sintret.finsrecipe.sql.Order;
 import eizougraphic.sintret.finsrecipe.sql.Person;
 
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+public class NoviewAdapter extends RecyclerView.Adapter<NoviewAdapter.ViewHolder> {
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -41,10 +38,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         }
     }
 
-    List<Order> orders;
+    List<Person> persons;
 
-    public TaskAdapter(List<Order> orders) {
-        this.orders = orders;
+    public NoviewAdapter(List<Person> persons) {
+        this.persons = persons;
     }
 
     @Override
@@ -56,32 +53,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.name.setText(orders.get(position).customer);
-        holder.address.setText(orders.get(position).address);
-        String thePhone = orders.get(position).phone;
-        String firstLetter = "";
-        firstLetter = thePhone.substring(0, 1);
-
-        String phone = "";
-        if(firstLetter.equals("0")){
-            phone=thePhone;
-        } else {
-            phone="+"+thePhone;
-        }
-        holder.phone.setText(phone);
-
-        holder.name.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                Intent intent = new Intent(v.getContext(), ItemActivity.class);
-                intent.putExtra("customer", orders.get(position).customer);
-                v.getContext().startActivity(intent);
-                //startActivity(intent);
-                return false;
-            }
-        });
-
+        holder.name.setText(persons.get(position).name);
+        holder.address.setText(persons.get(position).address);
     }
 
     @Override
@@ -92,6 +65,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return orders.size();
+        return persons.size();
     }
 }

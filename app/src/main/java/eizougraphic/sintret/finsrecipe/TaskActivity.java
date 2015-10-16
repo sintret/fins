@@ -33,6 +33,7 @@ import eizougraphic.sintret.finsrecipe.library.JSONParser;
 import eizougraphic.sintret.finsrecipe.library.SessionManager;
 import eizougraphic.sintret.finsrecipe.sql.Order;
 import eizougraphic.sintret.finsrecipe.sql.Person;
+import eizougraphic.sintret.finsrecipe.task.NoviewAdapter;
 import eizougraphic.sintret.finsrecipe.task.TaskAdapter;
 
 public class TaskActivity extends AppCompatActivity
@@ -186,7 +187,7 @@ public class TaskActivity extends AppCompatActivity
         protected JSONObject doInBackground(String... params) {
             JSONParser jsonParser = new JSONParser();
 
-            String Url = AppConfig.URL_TASK_TEST + "?token=" + session.token();
+            String Url = AppConfig.URL_TASK + "?token=" + session.token();
             Log.d("this url", Url);
 
             //Getting JSON from url
@@ -200,12 +201,18 @@ public class TaskActivity extends AppCompatActivity
 
                 Log.d("JSON OBJEct",jsonObject.toString());
                 Boolean error = jsonObject.getBoolean(AppConfig.TAG_ERROR);
+                String errorMessage = jsonObject.getString(AppConfig.TAG_ERROR_MESSAGE);
 
                 //if no data available
                 if (error == true) {
-                    String errorMessage = jsonObject.getString(AppConfig.TAG_ERROR_MESSAGE);
                     Toast.makeText(TaskActivity.this, errorMessage, Toast.LENGTH_LONG).show();
-                    progressDialog.hide();
+                    List<Person> noviews;
+
+                    noviews = new ArrayList<>();
+                    noviews.add(new Person("No Data Available", "Your Task Empty"));
+
+                    NoviewAdapter adapter = new NoviewAdapter(noviews);
+                    rv.setAdapter(adapter);
                 } else {
                     List<Order> orders;
                     orders = new ArrayList<>();
@@ -214,10 +221,9 @@ public class TaskActivity extends AppCompatActivity
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject jsonData = array.getJSONObject(i);
                         orders.add(toOrder(jsonData));
+                        TaskAdapter adapter = new TaskAdapter(orders);
+                        rv.setAdapter(adapter);
                     }
-
-                    TaskAdapter adapter = new TaskAdapter(orders);
-                    rv.setAdapter(adapter);
                 }
 
                 progressDialog.hide();

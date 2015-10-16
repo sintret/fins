@@ -23,7 +23,7 @@ public class AppConfig {
     public static String URL_FORGOT = "http://gurame.net/kueijo/web/site/forgot_password";
 
     public static String URL_TASK = "http://gurame.net/kueijo/web/api/task";
-
+    public static String URL_HISTORY = "http://gurame.net/kueijo/web/api/history";
     public static String URL_TASK_TEST = "http://gurame.net/kueijo/web/api/test-task";
 
 }
