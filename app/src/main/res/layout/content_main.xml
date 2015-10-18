@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textSize="16sp"
                 android:layout_alignParentTop="true"/>
 
             <TextView
@@ -32,12 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textSize="16sp"
                 android:layout_below="@+id/textView"/>
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textSize="16sp"
                 android:layout_below="@+id/textView2"/>
         </RelativeLayout>
 
