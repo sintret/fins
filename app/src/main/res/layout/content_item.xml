@@ -51,13 +51,6 @@
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="10dp" />
 
-            <View
-                android:id="@+id/separator"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_below="@+id/provinsi"
-                android:background="@color/dividers" />
-
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
