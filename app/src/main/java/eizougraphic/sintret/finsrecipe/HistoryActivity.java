@@ -33,8 +33,8 @@ import eizougraphic.sintret.finsrecipe.library.JSONParser;
 import eizougraphic.sintret.finsrecipe.library.SessionManager;
 import eizougraphic.sintret.finsrecipe.sql.Order;
 import eizougraphic.sintret.finsrecipe.sql.Person;
-import eizougraphic.sintret.finsrecipe.task.NoviewAdapter;
-import eizougraphic.sintret.finsrecipe.task.TaskAdapter;
+import eizougraphic.sintret.finsrecipe.NoviewAdapter;
+import eizougraphic.sintret.finsrecipe.TaskAdapter;
 
 public class HistoryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,18 +59,11 @@ public class HistoryActivity extends AppCompatActivity
         }
 
         // Fetching user details from SQLite
-
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "No Promo at this moment...", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.hide();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

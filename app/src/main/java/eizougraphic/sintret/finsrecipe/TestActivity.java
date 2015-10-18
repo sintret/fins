@@ -23,7 +23,7 @@ import java.util.List;
 
 import eizougraphic.sintret.finsrecipe.library.SessionManager;
 import eizougraphic.sintret.finsrecipe.sql.Person;
-import eizougraphic.sintret.finsrecipe.task.TaskAdapter;
+import eizougraphic.sintret.finsrecipe.TaskAdapter;
 
 public class TestActivity  extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

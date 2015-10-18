@@ -5,21 +5,20 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,8 +32,8 @@ import eizougraphic.sintret.finsrecipe.library.JSONParser;
 import eizougraphic.sintret.finsrecipe.library.SessionManager;
 import eizougraphic.sintret.finsrecipe.sql.Order;
 import eizougraphic.sintret.finsrecipe.sql.Person;
-import eizougraphic.sintret.finsrecipe.task.NoviewAdapter;
-import eizougraphic.sintret.finsrecipe.task.TaskAdapter;
+import eizougraphic.sintret.finsrecipe.NoviewAdapter;
+import eizougraphic.sintret.finsrecipe.TaskAdapter;
 
 public class TaskActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,22 +51,14 @@ public class TaskActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        session = new SessionManager(getApplicationContext());
-
-        if (!session.isLoggedIn()) {
-            logoutUser();
-        }
-
-        // Fetching user details from SQLite
-
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "No Promo at this moment...", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -81,6 +72,12 @@ public class TaskActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        session = new SessionManager(getApplicationContext());
+
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
+
         /* your logic here */
 
         rv = (RecyclerView) findViewById(R.id.recycle_view);
@@ -90,6 +87,23 @@ public class TaskActivity extends AppCompatActivity
 
         JSONParse jsonParse = new JSONParse();
         jsonParse.execute();
+
+     /*   rv = (RecyclerView) findViewById(R.id.recycle_view);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(mLayoutManager);
+
+        List<Person> persons;
+
+        persons = new ArrayList<>();
+        persons.add(new Person("Emma Wilson", "Kedaung Permai"));
+        persons.add(new Person("Lavery Maiss", "25 years old"));
+        persons.add(new Person("Lillie Watts", "35 years old"));
+
+        NoviewAdapter adapter = new NoviewAdapter(persons);
+        rv.setAdapter(adapter);*/
+
+
 
     }
 
@@ -101,6 +115,7 @@ public class TaskActivity extends AppCompatActivity
         startActivity(intent);
         finish();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -203,28 +218,47 @@ public class TaskActivity extends AppCompatActivity
                 Boolean error = jsonObject.getBoolean(AppConfig.TAG_ERROR);
                 String errorMessage = jsonObject.getString(AppConfig.TAG_ERROR_MESSAGE);
 
-                //if no data available
-                if (error == true) {
-                    Toast.makeText(TaskActivity.this, errorMessage, Toast.LENGTH_LONG).show();
-                    List<Person> noviews;
 
-                    noviews = new ArrayList<>();
-                    noviews.add(new Person("No Data Available", "Your Task Empty"));
+                if(jsonObject.toString() == null){
+                    progressDialog.hide();
+                    Toast.makeText(TaskActivity.this, "Internet Lost", Toast.LENGTH_LONG).show();
 
-                    NoviewAdapter adapter = new NoviewAdapter(noviews);
-                    rv.setAdapter(adapter);
                 } else {
-                    List<Order> orders;
-                    orders = new ArrayList<>();
-                    JSONArray array = jsonObject.getJSONArray(AppConfig.TAG_DATA);
 
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject jsonData = array.getJSONObject(i);
-                        orders.add(toOrder(jsonData));
-                        TaskAdapter adapter = new TaskAdapter(orders);
+                    //if no data available
+                    if (error == true) {
+                        Toast.makeText(TaskActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                        List<Person> noviews;
+                        noviews = new ArrayList<>();
+
+                        noviews.add(new Person("No Data Available", "Your Task Empty"));
+                        NoviewAdapter adapter = new NoviewAdapter(noviews);
                         rv.setAdapter(adapter);
+                    } else {
+                        List<Order> orders;
+                        orders = new ArrayList<>();
+                        JSONArray array = jsonObject.getJSONArray(AppConfig.TAG_DATA);
+
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject jsonData = array.getJSONObject(i);
+                            orders.add(toOrder(jsonData));
+                        }
+                        if(array.length() == 0) {
+                            Toast.makeText(TaskActivity.this, "You have no task", Toast.LENGTH_LONG).show();
+                            List<Person> noviews;
+                            noviews = new ArrayList<>();
+
+                            noviews.add(new Person("No Data Available", "Your Task Empty"));
+                            NoviewAdapter adapter = new NoviewAdapter(noviews);
+                            rv.setAdapter(adapter);
+                        } else {
+                            TaskAdapter adapter = new TaskAdapter(orders);
+                            rv.setAdapter(adapter);
+                        }
                     }
                 }
+
+
 
                 progressDialog.hide();
 
