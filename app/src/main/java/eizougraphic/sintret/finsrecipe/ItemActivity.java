@@ -70,6 +70,10 @@ public class ItemActivity extends BaseActivity {
             provinsi.setText("Provinsi : " + bundle.getString("provinsi") +" Kab : " +bundle.get("kabupaten") + " Kec: "+ bundle.get("kecamatan"));
             item = (TextView) findViewById(R.id.item);
             item.setText("Items : " + bundle.getString("items"));
+            paymentMethod= (TextView) findViewById(R.id.payment_method);
+            paymentMethod.setText("Payment Method : " + bundle.getString("paymentMethod"));
+            deliveryDate = (TextView) findViewById(R.id.delivery_date);
+            deliveryDate.setText("Delivery Date : "+ bundle.getString("deliveryTime") +" " +  bundle.getString("deliveryDate") +" " + bundle.getString("deliveryHour"));
 
         }
 
