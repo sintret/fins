@@ -1,5 +1,9 @@
 package eizougraphic.sintret.finsrecipe.library;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 public class AppConfig {
     // variable to get data from async
     public static final String TAG_DATA = "data";
@@ -25,5 +29,19 @@ public class AppConfig {
     public static String URL_TASK = "http://gurame.net/kueijo/web/api/task";
     public static String URL_HISTORY = "http://gurame.net/kueijo/web/api/history";
     public static String URL_TASK_TEST = "http://gurame.net/kueijo/web/api/test-task";
+
+    public static boolean isNetworkAvailable(Context ctx)
+    {
+        ConnectivityManager cm = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()&& cm.getActiveNetworkInfo().isAvailable()&& cm.getActiveNetworkInfo().isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }
