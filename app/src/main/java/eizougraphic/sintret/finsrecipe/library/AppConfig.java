@@ -29,6 +29,7 @@ public class AppConfig {
     public static String URL_TASK = "http://gurame.net/kueijo/web/api/task";
     public static String URL_HISTORY = "http://gurame.net/kueijo/web/api/history";
     public static String URL_TASK_TEST = "http://gurame.net/kueijo/web/api/test-task";
+    public static String URL_EXECUTE = "http://gurame.net/kueijo/web/api/delivery";
 
     public static boolean isNetworkAvailable(Context ctx)
     {
