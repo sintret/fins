@@ -23,10 +23,12 @@ public class Order {
     public String deliveryTime;
     public String remark;
     public String items;
+    public Integer deliveryStatus;
+    public String deliveryNote;
 
     public Order(String id, String customer, String address, String address2, String phone, String phone2, String kodepos,
                  String provinsi, String kabupaten, String kecamatan, String subTotal,String discount, String total, String shippingFee, String paymentMethod,
-                 String deliveryDate, String deliveryHour, String deliveryTime, String remark, String items){
+                 String deliveryDate, String deliveryHour, String deliveryTime, String remark, String items, Integer deliveryStatus){
 
         this.id=id;
         this.customer=customer;
@@ -48,7 +50,7 @@ public class Order {
         this.deliveryTime=deliveryTime;
         this.remark=remark;
         this.items=items;
-
+        this.deliveryStatus=deliveryStatus;
 
     }
 
