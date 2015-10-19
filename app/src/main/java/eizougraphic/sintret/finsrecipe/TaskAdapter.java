@@ -88,6 +88,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 intent.putExtra("deliveryTime", orders.get(position).deliveryTime);
                 intent.putExtra("remark", orders.get(position).remark);
                 intent.putExtra("items", orders.get(position).items);
+                intent.putExtra("deliveryStatus", orders.get(position).deliveryStatus);
 
 
                 v.getContext().startActivity(intent);

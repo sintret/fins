@@ -55,13 +55,8 @@ public class TaskActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.hide();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -259,7 +254,6 @@ public class TaskActivity extends AppCompatActivity
                 }
 
 
-
                 progressDialog.hide();
 
                 Log.d("description :", error + " is true");
@@ -290,8 +284,9 @@ public class TaskActivity extends AppCompatActivity
             String deliveryTime = jsonObject.getString("deliveryTime");
             String remark = jsonObject.getString("remark");
             String items = jsonObject.getString("items");
+            Integer deliveryStatus = jsonObject.getInt("deliveryStatus");
 
-            return new Order(id, customer, address, address2, phone, phone2, kodepos, provinsi, kabupaten, kecamatan, subTotal, discount, total, shippingFee, paymentMethod, deliveryDate, deliveryHour, deliveryTime, remark, items);
+            return new Order(id, customer, address, address2, phone, phone2, kodepos, provinsi, kabupaten, kecamatan, subTotal, discount, total, shippingFee, paymentMethod, deliveryDate, deliveryHour, deliveryTime, remark, items, deliveryStatus);
         }
 
 
