@@ -63,11 +63,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".MapActivity"
-            android:label="Map Route"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
             android:name=".ScannerActivity"
             android:label="Scan Order"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -96,8 +91,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:name=".MapActivity"
+            android:label="Map Route"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 
