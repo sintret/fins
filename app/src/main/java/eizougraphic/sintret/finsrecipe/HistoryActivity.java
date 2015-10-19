@@ -249,10 +249,10 @@ public class HistoryActivity extends AppCompatActivity
             String deliveryTime = jsonObject.getString("deliveryTime");
             String remark = jsonObject.getString("remark");
             String items = jsonObject.getString("items");
+            Integer deliveryStatus = jsonObject.getInt("deliveryStatus");
 
-            return new Order(id, customer, address, address2, phone, phone2, kodepos, provinsi, kabupaten, kecamatan, subTotal, discount, total, shippingFee, paymentMethod, deliveryDate, deliveryHour, deliveryTime, remark, items);
+            return new Order(id, customer, address, address2, phone, phone2, kodepos, provinsi, kabupaten, kecamatan, subTotal, discount, total, shippingFee, paymentMethod, deliveryDate, deliveryHour, deliveryTime, remark, items, deliveryStatus);
         }
-
 
     }
 }
