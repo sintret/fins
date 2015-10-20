@@ -20,6 +20,8 @@ public class AppConfig {
     public static final String TAG_CREATED_AT = "created_at";
     public static final String TAG_UPDATED_AT = "updated_at";
 
+    public static final String TAG_GCM_REGID = "gcm_regid";
+
 
     // Server user login url
     public static String URL_LOGIN = "http://gurame.net/kueijo/web/api/login";
@@ -30,6 +32,9 @@ public class AppConfig {
     public static String URL_HISTORY = "http://gurame.net/kueijo/web/api/history";
     public static String URL_TASK_TEST = "http://gurame.net/kueijo/web/api/test-task";
     public static String URL_EXECUTE = "http://gurame.net/kueijo/web/api/delivery";
+    public static String URL_REGISTER_GCM = "http://gurame.net/kueijo/web/api/register";
+
+    public static String SERVER_SUCCESS = "Succcess to Register";
 
     public static boolean isNetworkAvailable(Context ctx)
     {

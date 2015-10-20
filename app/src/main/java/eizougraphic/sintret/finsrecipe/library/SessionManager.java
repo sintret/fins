@@ -20,6 +20,7 @@ public class SessionManager {
     // Shared preferences file name
     private static final String PREF_NAME = "Kueijo";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
+    private static final String PREF_GCM_REG_ID = "GCMRegId";
 
     public SessionManager(Context context) {
         this._context = context;
@@ -34,6 +35,13 @@ public class SessionManager {
         Log.d(TAG, "User login session modified!");
     }
 
+    public void setGCM(String gcmRegId){
+        editor.putString(AppConfig.TAG_GCM_REGID, gcmRegId);
+        editor.commit();
+        Log.d(TAG, "User login session modified!");
+
+    }
+
     public void setLogin(boolean isLoggedIn) {
 
         editor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn);
@@ -42,6 +50,9 @@ public class SessionManager {
         editor.commit();
 
         Log.d(TAG, "User login session modified!");
+    }
+    public String gcm_regid() {
+        return pref.getString(AppConfig.TAG_GCM_REGID, "DEFAULT");
     }
 
     public boolean isLoggedIn() {
